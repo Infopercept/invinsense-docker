@@ -21,9 +21,11 @@ RUN apt-get update && \
     apt-get install wazuh-manager=${WAZUH_VERSION}-${WAZUH_TAG_REVISION}
 
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb &&\
-    dpkg -i ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb && rm -f ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb && \
-    COPY config/wazuh-filebeat-0.2.tar.gz . && \
-    tar -xvzf wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
+    dpkg -i ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb && rm -f ${FILEBEAT_CHANNEL}-${FILEBEAT_VERSION}-amd64.deb
+    
+COPY config/wazuh-filebeat-0.2.tar.gz /
+
+RUN tar -xvzf /wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
 
 RUN chown -R root:root /usr/share/filebeat/module/wazuh
 

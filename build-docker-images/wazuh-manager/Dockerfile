@@ -27,7 +27,7 @@ COPY config/wazuh-filebeat-0.2.tar.gz /
 
 RUN tar -xvzf /wazuh-filebeat-0.2.tar.gz -C /usr/share/filebeat/module
 
-RUN chown -R root:root /usr/share/filebeat/module/wazuh
+RUN chown -R root:wazuh /usr/share/filebeat/module/wazuh
 
 RUN chmod go-w /usr/share/filebeat/module/wazuh/alerts/manifest.yml
 RUN chmod go-w /usr/share/filebeat/module/wazuh/archives/manifest.yml
@@ -48,7 +48,7 @@ COPY config/filebeat.yml /etc/filebeat/
 
 RUN chmod go-w /etc/filebeat/filebeat.yml
 
-COPY config/wazuh-template.json /etc/filebeat/wazuh-template.json
+COPY config/wazuh-template.json /etc/filebeat/
 RUN chmod go-w /etc/filebeat/wazuh-template.json
 
 # Prepare permanent data
